@@ -64,8 +64,6 @@
   </div>
 
   <script>
-    const tickSound = document.getElementById("tickSound");
-
     function updateClock() {
       const element = document.querySelector('.clock');
       const time = new Date();
@@ -77,11 +75,6 @@
         hour12: false
       };
       element.textContent = time.toLocaleTimeString('en-US', options);
-
-      // Play ticking sound each second
-      tickSound.currentTime = 0; 
-      tickSound.play();
-
       setTimeout(updateClock, 1000 - time.getMilliseconds());
     }
 
