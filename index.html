@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern JS Clock with Ticking Sound</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: "Poppins", sans-serif;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
+    }
+
+    .clock-container {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 60px 100px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .clock {
+      font-size: 4.5rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h2 class="title">⏰ JavaScript Clock Project</h2>
+    
+    <div class="clock-container">
+      <h1 class="clock">00:00:00</h1>
+    </div>
+  </div>
+
+  <script>
+    const tickSound = document.getElementById("tickSound");
+
+    function updateClock() {
+      const element = document.querySelector('.clock');
+      const time = new Date();
+      const options = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+      element.textContent = time.toLocaleTimeString('en-US', options);
+
+      // Play ticking sound each second
+      tickSound.currentTime = 0; 
+      tickSound.play();
+
+      setTimeout(updateClock, 1000 - time.getMilliseconds());
+    }
+
+    updateClock();
+  </script>
+</body>
+</html>
